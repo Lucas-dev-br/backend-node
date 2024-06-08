@@ -3,6 +3,7 @@ const router = express.Router();
 
 const TasksController = require("../app/controllers/api/TasksController");
 const UsersController = require("../app/controllers/api/UsersController");
+const AgendaController = require("../app/controllers/api/AgendaController");
 
 // Rotas das Tarefas
 router.get('/tasks', TasksController.list)
@@ -19,6 +20,10 @@ router.get('/users/:id', TasksController.show)
 router.post('/users', UsersController.save)
 router.delete('/users/:id', UsersController.remove)
 // router.put('/users/:id', UsersController.update)
+
+// Rotas da agenda
+router.get('/agendas', AgendaController.listAgenda)
+router.post('/agendas', AgendaController.createAgenda)
 
 
 router.get('*', function notFound(request, response) {
