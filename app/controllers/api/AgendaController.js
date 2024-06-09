@@ -16,9 +16,64 @@ function AgendaController () {
         }
     }
 
+    async function getAgendaById(req, res){
+        try {
+
+            const agenda = await agendaRepository.findAgenda(req.params.id);
+      
+            if (!agenda) {
+              return res.status(404).send({
+                message: "Agenda não encontrada."
+              })
+            }
+      
+            res.status(200).json(agenda);
+      
+          } catch (error) {
+            res.status(500).json({
+              message: "Agenda não encontrada"
+            });
+          }
+    }
+
+    async function updateAgenda(req, res){
+        const agenda = await agendaRepository.findAgenda(req.params.id);
+
+        if(!agenda) {
+            return res.status(404).send({
+                message: "Agenda não encontrada."
+            })
+        }
+
+        await agendaRepository.updateAgenda(req.params.id, req.body);
+
+        res.json({
+            message: "Agenda atualizada com sucesso"
+        })
+    }
+
+    async function deleteAgenda(req, res) {
+        const agenda = await agendaRepository.deleteAgenda(req.params.id);
+
+        if (!agenda) {
+            return res.status(404).send({
+              message: "Agenda não encontrada."
+            })
+        }
+
+        await agendaRepository.deleteAgenda(req.params.id);
+
+        res.status(200).json({
+            message: "Agenda deletada com sucesso"
+        })
+    }
+
     return {
         listAgenda,
-        createAgenda
+        createAgenda,
+        updateAgenda,
+        deleteAgenda,
+        getAgendaById
     }
 }
 

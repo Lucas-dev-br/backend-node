@@ -24,6 +24,9 @@ router.delete('/users/:id', UsersController.remove)
 // Rotas da agenda
 router.get('/agendas', AgendaController.listAgenda)
 router.post('/agendas', AgendaController.createAgenda)
+router.get('/agendas/:id', AgendaController.getAgendaById)
+router.delete('/agendas/:id', AgendaController.deleteAgenda)
+router.put('/agendas/:id', AgendaController.updateAgenda)
 
 
 router.get('*', function notFound(request, response) {
