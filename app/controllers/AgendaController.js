@@ -12,13 +12,18 @@ function AgendaController() {
     }
 
     async function createAgenda(req, res) {
-        await AgendaRepository.createAgenda(req.body);
-        res.redirect("/agendas")
+        res.redirect("/agendas/save")
     }
+
+    async function deleteAgenda(req, res) {
+        await AgendaRepository.deleteAgenda(req.params.id);
+        res.redirect('/agendas')
+      }
 
     return {
         listAgenda,
-        createAgenda
+        createAgenda,
+        deleteAgenda
     }
 }
 

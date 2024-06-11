@@ -21,13 +21,9 @@ function AgendaController () {
 
             const agenda = await agendaRepository.findAgenda(req.params.id);
       
-            if (!agenda) {
-              return res.status(404).send({
-                message: "Agenda não encontrada."
-              })
-            }
-      
             res.status(200).json(agenda);
+
+            res.status(404).me
       
           } catch (error) {
             res.status(500).json({
@@ -55,16 +51,14 @@ function AgendaController () {
     async function deleteAgenda(req, res) {
         const agenda = await agendaRepository.deleteAgenda(req.params.id);
 
-        if (!agenda) {
-            return res.status(404).send({
-              message: "Agenda não encontrada."
-            })
-        }
-
         await agendaRepository.deleteAgenda(req.params.id);
 
         res.status(200).json({
             message: "Agenda deletada com sucesso"
+        })
+
+        res.status(404).send({
+            message: "Agenda não encontrada."
         })
     }
 

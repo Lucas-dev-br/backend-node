@@ -7,8 +7,8 @@ function NavegacaoController() {
     }
 
     function usuarios(request, response) {
-        return response.render("users/index", {
-            title: "Lista de Usuários"
+        return response.render("agendas/list", {
+            title: "Lista de agendas"
         });
     }
 
